@@ -1,16 +1,15 @@
 const express = require("express");
 const app = express();
 
-app.use("/",(req,res)=>{
-    res.send("Hello from home page");
+const {adminAuth} = require("./middlewares/auth");
+
+app.use("/admin", adminAuth)
+
+app.get("/admin/data",(req,res, next)=>{
+    res.send("Admin data sent");
+    // console.log("user called but sent no response");
 });
 
-app.use("/test",(req,res)=>{
-    res.send("Test page")
-});
 
-app.use("/browse",(req,res)=>{
-    res.send("Browse page");
-});
 
 app.listen(3000, ()=>console.log("Server Started"))
