@@ -11,6 +11,4 @@ const adminAuth = (req,res,next)=>{
     }
 }
 
-module.exports={
-    adminAuth
-}
+module.exports= adminAuth
