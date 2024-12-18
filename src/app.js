@@ -30,10 +30,19 @@ app.get("/user", async (req,res)=>{
     }
 })
 
-app.patch("/user", async (req,res)=>{
-    const userId= req.body.userId;
+app.patch("/user/:userId", async (req,res)=>{
+    const userId= req.params?.userId;
     const data= req.body;
     try {
+        const ALLOWED_UPDATES=["about","gender","age","skills"];
+        const isUpdateAllowed= Object.keys(data).every((k)=>ALLOWED_UPDATES.includes(k));
+        if(!isUpdateAllowed){
+            throw new Error("Not allowed field!")
+        }
+
+        if(data?.skills?.length>10) throw new Error("Skills should be less than 10!");
+        if(data?.age<10 || data?.age>100) throw new Error("Please stay away!");
+        if(data?.about?.length>100) throw new Error("Enter description in less than 100 letters!")
        await User.findByIdAndUpdate({_id:userId},data,{
         returnDocument:"after",
         runValidators: true
