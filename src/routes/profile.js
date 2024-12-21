@@ -39,6 +39,8 @@ profileRouter.patch("/profile/password", userAuth, async (req, res) => {
     const newPassword = req.body.password;
     const isPasswordValid = validateNewPassword(newPassword);
     if (!isPasswordValid) throw new Error("Enter valid Password");
+    const isSamePassword = await bcrypt.compare(newPassword,loggedInUser["password"]);
+    if(isSamePassword) throw new Error("Password already in use!")
     const newPasswordHash = await bcrypt.hash(newPassword,10);
     loggedInUser["password"] = newPasswordHash;
     await loggedInUser.save();
