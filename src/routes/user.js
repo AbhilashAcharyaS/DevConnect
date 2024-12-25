@@ -61,6 +61,11 @@ userRouter.get("/feed", userAuth, async (req, res) => {
   try {
     const loggedInUser = req.user;
 
+    const page= parseInt(req.query.page) || 1;
+    let limit= parseInt(req.query.limit) || 10;
+    limit>20 ? limit=20 : limit;
+    const skip= (page-1)*limit;
+
     const connectionRequests = await ConnectionRequest.find({
       $or: [{ fromUserId: loggedInUser._id }, { toUserId: loggedInUser._id }],
     }).select("fromUserId toUserId");
@@ -76,12 +81,12 @@ userRouter.get("/feed", userAuth, async (req, res) => {
         { _id: { $nin: Array.from(hideUsersFromFeed) } },
         { _id: { $ne: loggedInUser._id } },
       ],
-    }).select(SAFE_DATA);
+    }).select(SAFE_DATA).skip(skip).limit(limit);
 
-    res.send(users);
+    res.json({data:users});
   } catch (error) {
     res.status(400).send("Error: " + error.message);
   }
-});
+})
 
 module.exports = userRouter;
