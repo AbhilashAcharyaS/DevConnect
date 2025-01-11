@@ -29,7 +29,7 @@ authRouter.post("/signup", async (req, res) => {
       const token = await user.getJWT();
       res.cookie("tokenJwt", token , {expires: new Date(Date.now()+ 8 * 3600000)});
 
-      res.send("User added successfully!");
+      res.send(user);
 
     } catch (error) {
       res.status(400).send("Error: " + error.message);
