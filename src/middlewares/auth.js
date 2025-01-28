@@ -11,7 +11,7 @@ const userAuth = async (req, res, next) => {
     }
 
     //validate token
-    const decodedData = await jwt.verify(tokenJwt, "devConnectByAbhilash");
+    const decodedData = await jwt.verify(tokenJwt, process.env.JWT_SECRET);
     const { _id } = decodedData;
 
     //find user
