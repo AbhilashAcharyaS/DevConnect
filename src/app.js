@@ -10,7 +10,7 @@ const userRouter = require("./routes/user");
 const cors = require("cors");
 require("dotenv").config();
 const http = require("http");
-const { initializeSocket } = require("./utils/socket");
+const initializeSocket = require("./utils/socket");
 
 
 app.use(cors({
