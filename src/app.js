@@ -20,7 +20,7 @@ app.use(cors({
 }))
 
 app.use(cors({
-  origin:"https://dev-connect-ui-react.vercel.app/",
+  origin:"https://dev-connect-ui-react.vercel.app",
   credentials:true,
 }))
 
