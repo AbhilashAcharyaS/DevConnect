@@ -1,26 +1,21 @@
 const express = require("express");
-const connectDB = require("./src/config/database");
-const User = require("./src/models/user");
+const connectDB = require("./config/database");
+const User = require("./models/user");
 const app = express();
 const cookieParser = require("cookie-parser");
-const authRouter = require("./src/routes/auth");
-const profileRouter = require("./src/routes/profile");
-const requestRouter = require("./src/routes/request");
-const userRouter = require("./src/routes/user");
+const authRouter = require("./routes/auth");
+const profileRouter = require("./routes/profile");
+const requestRouter = require("./routes/request");
+const userRouter = require("./routes/user");
 const cors = require("cors");
 require("dotenv").config();
 const http = require("http");
-const initializeSocket = require("./src/utils/socket");
-const chatRouter = require("./src/routes/chat");
+const initializeSocket = require("./utils/socket");
+const chatRouter = require("./routes/chat");
 
 
 app.use(cors({
-  origin:"http://localhost:5173",
-  credentials:true,
-}))
-
-app.use(cors({
-  origin:"https://dev-connect-ui-react.vercel.app",
+  origin:["http://localhost:5173","https://dev-connect-ui-react.vercel.app"],
   credentials:true,
 }))
 
