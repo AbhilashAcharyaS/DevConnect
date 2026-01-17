@@ -27,7 +27,7 @@ authRouter.post("/signup", async (req, res) => {
       
       //save cookie after successful login
       const token = await user.getJWT();
-      res.cookie("tokenJwt", token , {expires: new Date(Date.now()+ 8 * 3600000)});
+      res.cookie("tokenJwt", token , {expires: new Date(Date.now()+ 8 * 3600000), secure:true, sameSite:"none"});
 
       res.send(user);
 
@@ -57,7 +57,7 @@ authRouter.post("/signup", async (req, res) => {
   });
 
   authRouter.post("/logout", (req,res)=>{
-    res.cookie("tokenJwt", null,{expires: new Date(Date.now())});
+    res.cookie("tokenJwt", null,{expires: new Date(Date.now()), secure:true, sameSite:"none"});
     res.send("Logged Out!")
   })
 
