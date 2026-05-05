@@ -15,7 +15,7 @@ const chatRouter = require("./routes/chat");
 
 
 app.use(cors({
-  origin:"https://dev-connect-by-abhilash.vercel.app",
+  origin:"https://devconnect-backend-lpy6.onrender.com",
   credentials:true,
 }))
 
