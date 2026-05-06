@@ -12,7 +12,7 @@ const getSecretRoomId=(userId,targetUserId)=>{
 const initializeSocket=(server)=>{
     const io=socket(server,{
         cors:{
-          origin:"https://devconnect-backend-lpy6.onrender.com",
+          origin:"https://devconnect-frontend-51xj.onrender.com",
           credentials:true
         }
       })
