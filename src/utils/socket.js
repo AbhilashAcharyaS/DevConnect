@@ -1,6 +1,6 @@
 const socket=require("socket.io");
 const crypto= require("crypto");
-const Chat = require("../models/chat ");
+const Chat = require("../models/chat");
 
 const getSecretRoomId=(userId,targetUserId)=>{
     return crypto
@@ -13,7 +13,7 @@ const initializeSocket=(server)=>{
     const io=socket(server,{
         cors:{
           origin:"https://devconnect-frontend-51xj.onrender.com",
-          credentials:true
+          credentials:true,
         }
       })
       
