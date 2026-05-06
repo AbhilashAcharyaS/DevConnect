@@ -44,9 +44,11 @@ const initializeSocket=(server)=>{
 
                 chat.messages.push({senderId:userId, text});
 
+                const lastMessage = chat.messages[chat.messages.length - 1];
+
                 await chat.save();
                 
-                io.to(roomId).emit("messageRecieved",{firstName,lastName,text})
+                io.to(roomId).emit("messageRecieved",{firstName,lastName,text, time:lastMessage.createdAt,})
             } catch (error) {
                 console.log(error);
                 
